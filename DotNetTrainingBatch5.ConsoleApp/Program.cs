@@ -67,3 +67,70 @@ Console.WriteLine("Connection Closed");
 
 //SqlDataAdapter >> for group dataset (not many amount number should use)
 //SqlDataReader  >> for performance, can use line by line read (not for some group of dataset usage)
+
+Console.Write("Enter Blog Tite");
+string Title = Console.ReadLine();
+
+Console.Write("Enter Blog Author");
+string Author = Console.ReadLine();
+
+Console.Write("Enter Blog Content");
+string Content = Console.ReadLine();
+
+
+string connectionString1 = "Data Source=.;Initial Catalog=DotNetTrainingBatch5;User Id=sa;Password=p@ssw0rd";
+SqlConnection con2 = new SqlConnection(connectionString1);
+
+con2.Open();
+//string insquery = $@"INSERT INTO [dbo].[Tbl_Blog]
+//           ([BlogTitle]
+//           ,[BlogAuthor]
+//           ,[BlogContent]
+//           ,[DeleteFlag])
+//     VALUES
+//           ('{Title}' 
+//           ,'{Author}'
+//           ,'{Content}'
+//           ,0)";
+
+string insquery = $@"insert into [dbo].[tbl_blog]
+           ([blogtitle]
+           ,[blogauthor]
+           ,[blogcontent]
+           ,[deleteflag])
+     values
+           (@blogtitle 
+           ,@blogauthor
+           ,@blogcontent
+           ,0)";
+
+//string so yin '_' need (imp)
+
+SqlCommand insCmd = new SqlCommand(insquery, con2);
+//For sql injection protection
+insCmd.Parameters.AddWithValue("@blogtitle", Title);
+insCmd.Parameters.AddWithValue("@blogauthor", Author);
+insCmd.Parameters.AddWithValue("@blogcontent", Content);
+//SqlDataAdapter adapter = new SqlDataAdapter(insCmd);
+//DataTable db = new DataTable();
+//adapter.Fill(db);
+
+//foreach (DataRow drow in db.Rows)
+//{
+//    Console.WriteLine(drow["BlogId"] + "|" + drow["BlogTitle"] + "|" + drow["BlogAuthor"] + "|" + drow["BlogContent"]);
+//}
+
+int result = insCmd.ExecuteNonQuery();
+//if(result == 1)
+//{
+//    Console.WriteLine("Success Insert");
+//}
+//else
+//{
+//    Console.WriteLine("Success Fail");
+//}
+
+Console.WriteLine(result == 1 ? "Success Insert" : "Fail");
+con2.Close();
+
+//24min
