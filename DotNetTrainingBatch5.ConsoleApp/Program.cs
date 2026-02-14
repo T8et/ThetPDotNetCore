@@ -27,9 +27,12 @@ Console.ReadKey();
 
 //24min
 
-AdoDotNetExample adn = new AdoDotNetExample();
+//AdoDotNetExample adn = new AdoDotNetExample();
 //adn.Extract();
 //adn.Create();
 //adn.Read();
 //adn.Update();
-adn.Delete();
+//adn.Delete();
+
+DapperExample dp = new DapperExample();
+dp.Read();
