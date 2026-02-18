@@ -17,3 +17,10 @@ Blazor Web Server
 .NET >> teach
 
 UI + Business Logic + Data Access => Database
+
+ADO.NET >> CRUD (DataAdapter & DataReader)
+Dapper  >> CRUD (Parameter & Model)
+
+
+
+
